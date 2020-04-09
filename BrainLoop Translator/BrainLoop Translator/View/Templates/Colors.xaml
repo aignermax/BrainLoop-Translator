@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:BrainLoop_Translator.View.Templates">
+
+    <!--Colors-->
+    <Color x:Key="GuiGrayDark">#7C7C7B</Color>
+    
+    
+    <!--Brushes-->
+    <SolidColorBrush x:Key="BrushGuiGrayDark" Color="{StaticResource GuiGrayDark}" />
+
+</ResourceDictionary>
