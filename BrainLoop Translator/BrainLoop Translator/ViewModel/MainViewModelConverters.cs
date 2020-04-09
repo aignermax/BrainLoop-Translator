@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace BrainLoop_Translator.ViewModel.Converters
 {
@@ -44,9 +39,6 @@ namespace BrainLoop_Translator.ViewModel.Converters
                 }
 
                 var radius = (CornerRadius)values[2];
-
-                // Actually we need more complex geometry, when CornerRadius has different values.
-                // But let me not to take this into account, and simplify example for a common value.
                 var clip = new RectangleGeometry(new Rect(0, 0, width, height), radius.TopLeft, radius.TopLeft);
                 clip.Freeze();
 

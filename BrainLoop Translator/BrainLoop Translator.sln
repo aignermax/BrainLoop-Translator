@@ -4,30 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainLoop Translator", "BrainLoop Translator\BrainLoop Translator.csproj", "{944CBC17-3161-49C8-A084-3A5504257822}"
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TranslationWCFServer", "TranslationWCFServer\", "{09264E6B-94E4-4635-BC3A-A7870F97E8B5}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_53077"
-		Debug.AspNetCompiler.PhysicalPath = "TranslationWCFServer\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53077\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_53077"
-		Release.AspNetCompiler.PhysicalPath = "TranslationWCFServer\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53077\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "53077"
-		SlnRelativePath = "TranslationWCFServer\"
-		DefaultWebSiteLanguage = "Visual C#"
+	ProjectSection(ProjectDependencies) = postProject
+		{0053B848-D4BF-4D57-9DC7-CFB254E1247C} = {0053B848-D4BF-4D57-9DC7-CFB254E1247C}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslatorUnitTests", "TranslatorUnitTests\TranslatorUnitTests.csproj", "{EDC0CE18-7AE9-4775-9E80-68D8ACFF9870}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranslatorUnitTests", "TranslatorUnitTests\TranslatorUnitTests.csproj", "{EDC0CE18-7AE9-4775-9E80-68D8ACFF9870}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationWCFService", "TranslationWCFService\TranslationWCFService.csproj", "{0053B848-D4BF-4D57-9DC7-CFB254E1247C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationServerHOST", "TranslationServerHOST\TranslationServerHOST.csproj", "{3A7CFCB1-8DD0-4BDE-A30F-0225838E802F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,14 +24,18 @@ Global
 		{944CBC17-3161-49C8-A084-3A5504257822}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{944CBC17-3161-49C8-A084-3A5504257822}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{944CBC17-3161-49C8-A084-3A5504257822}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09264E6B-94E4-4635-BC3A-A7870F97E8B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09264E6B-94E4-4635-BC3A-A7870F97E8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09264E6B-94E4-4635-BC3A-A7870F97E8B5}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{09264E6B-94E4-4635-BC3A-A7870F97E8B5}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{EDC0CE18-7AE9-4775-9E80-68D8ACFF9870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EDC0CE18-7AE9-4775-9E80-68D8ACFF9870}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDC0CE18-7AE9-4775-9E80-68D8ACFF9870}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDC0CE18-7AE9-4775-9E80-68D8ACFF9870}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0053B848-D4BF-4D57-9DC7-CFB254E1247C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0053B848-D4BF-4D57-9DC7-CFB254E1247C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0053B848-D4BF-4D57-9DC7-CFB254E1247C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0053B848-D4BF-4D57-9DC7-CFB254E1247C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A7CFCB1-8DD0-4BDE-A30F-0225838E802F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A7CFCB1-8DD0-4BDE-A30F-0225838E802F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A7CFCB1-8DD0-4BDE-A30F-0225838E802F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A7CFCB1-8DD0-4BDE-A30F-0225838E802F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

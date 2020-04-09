@@ -14,7 +14,7 @@
             <Setter Property="Foreground" Value="{StaticResource BrushGuiGrayDark}" />
         </Style>
     </Page.Resources>
-    <Grid>
+    <Grid DataContext="{Binding MyTextFieldTranslatorViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="1*"/>
@@ -23,13 +23,10 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1">
-            <Bold>TextBlock</Bold> is designed to be <Italic>lightweight</Italic>,
-              and is geared specifically at integrating <Italic>small</Italic> portions
-              of flow content into a UI.
-        </TextBlock>
+        
         <TextBlock Grid.Row="0" Grid.Column="0" Text="translate" FontSize="11" Style="{StaticResource GrayBigText}"/>
-        <local:TextFieldTranslatorView Grid.Row="1" TextInside="{Binding MyTextFieldTranslatorViewModel.TextToTranslate, Mode=TwoWay}"/>
-        <local:TextFieldTranslatorView Grid.Row="1" Grid.Column="1" TextInside="{Binding MyTextFieldTranslatorViewModel.TranslatedText , Mode=TwoWay}"/>
+        <local:TextFieldTranslatorView Grid.Row="1" TextInside="{Binding TextToTranslate, Mode=TwoWay}"/>
+        <local:TextFieldTranslatorView Grid.Row="1" Grid.Column="1" TextInside="{Binding TranslatedText , Mode=TwoWay}"/>
+        <ComboBox Grid.Column="1" ItemsSource="{Binding AvailableLanguages}" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"/>
     </Grid>
 </Page>

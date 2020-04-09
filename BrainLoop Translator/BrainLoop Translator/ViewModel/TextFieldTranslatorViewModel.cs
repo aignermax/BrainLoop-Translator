@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BrainLoop_Translator.ViewModel
 {
@@ -30,6 +26,25 @@ namespace BrainLoop_Translator.ViewModel
                 NotifyPropertyChanged();
             }
         }
+
+        private List<string> _availableLanguages;
+        public List<string> AvailableLanguages
+        {
+            get { return _availableLanguages; }
+            set { _availableLanguages = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string _selectedLanguage;
+        public string SelectedLanguage
+        {
+            get { return _selectedLanguage; }
+            set { _selectedLanguage = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
 
         #region NotifyPropertyChanged
