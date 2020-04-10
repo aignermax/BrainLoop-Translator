@@ -11,5 +11,5 @@
     <Window.DataContext>
         <ViewModel:MainWindowViewModel/>
     </Window.DataContext>
-    <View:TranslatorMainView Margin="10"/>
+    <View:TranslatorMainView Margin="20"/>
 </Window>

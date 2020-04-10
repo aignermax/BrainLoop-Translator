@@ -14,10 +14,6 @@ namespace BrainLoop_Translator.ViewModel.Commands
     public class CMDTranslateNow : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private TranslatorServiceClient translatorServiceClient;
-        public CMDTranslateNow(TranslatorServiceClient WCFservice) {
-            translatorServiceClient = WCFservice;
-        }
 
         public bool CanExecute(object parameter)
         {
@@ -32,20 +28,13 @@ namespace BrainLoop_Translator.ViewModel.Commands
         {
             // translate
             TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
-            myTextFieldTransViewModel.TranslatedText = translatorServiceClient.GetTranslation(myTextFieldTransViewModel.SelectedLanguage, myTextFieldTransViewModel.TextToTranslate);
-            Debug.WriteLine("Translate now: " + myTextFieldTransViewModel.TranslatedText);
+            myTextFieldTransViewModel.TranslatedText = myTextFieldTransViewModel.MyTranslatorProxy.GetTranslation(myTextFieldTransViewModel.SelectedLanguage, myTextFieldTransViewModel.TextToTranslate);
         }
     }
 
     public class CMDDetectLanguage : ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private TranslatorServiceClient translatorServiceClient;
-        public CMDDetectLanguage(TranslatorServiceClient WCFservice)
-        {
-            translatorServiceClient = WCFservice;
-        }
-
         public bool CanExecute(object parameter)
         {
             if (parameter != null && parameter is TextFieldTranslatorViewModel)
@@ -59,19 +48,13 @@ namespace BrainLoop_Translator.ViewModel.Commands
         {
             // detect language
             TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
-            myTextFieldTransViewModel.DetectedLanguage = translatorServiceClient.DetectLanguage(myTextFieldTransViewModel.TextToTranslate);
-            Debug.WriteLine("detected Language: " + myTextFieldTransViewModel.DetectedLanguage);
+            myTextFieldTransViewModel.DetectedLanguage = myTextFieldTransViewModel.MyTranslatorProxy.DetectLanguage(myTextFieldTransViewModel.TextToTranslate);
         }
     }
 
     public class CMDGetAutoComplete: ICommand
     {
         public event EventHandler CanExecuteChanged;
-        private TranslatorServiceClient translatorServiceClient;
-        public CMDGetAutoComplete(TranslatorServiceClient WCFservice)
-        {
-            translatorServiceClient = WCFservice;
-        }
 
         public bool CanExecute(object parameter)
         {
@@ -84,10 +67,48 @@ namespace BrainLoop_Translator.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            // detect language
             TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
-            myTextFieldTransViewModel.DetectedLanguage = translatorServiceClient.DetectLanguage(myTextFieldTransViewModel.TextToTranslate);
-            Debug.WriteLine("detected Language: " + myTextFieldTransViewModel.DetectedLanguage);
+            myTextFieldTransViewModel.AutoCompleteSuggestion = myTextFieldTransViewModel.MyTranslatorProxy.GetAutoComplete (myTextFieldTransViewModel.TextToTranslate);
+        }
+    }
+    public class CMDAcceptAutoCompletedWord : ICommand
+    {
+        public event EventHandler CanExecuteChanged;
+        public bool CanExecute(object parameter)
+        {
+            if (parameter != null && parameter is TextFieldTranslatorViewModel)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void Execute(object parameter)
+        {
+            TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
+            if(string.IsNullOrEmpty(myTextFieldTransViewModel.AutoCompleteSuggestion) == false)
+            {
+                myTextFieldTransViewModel.TextToTranslate = myTextFieldTransViewModel.AutoCompleteSuggestion;
+            }
+        }
+    }
+    public class CMDGetSimilarWords : ICommand
+    {
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter)
+        {
+            if (parameter != null && parameter is TextFieldTranslatorViewModel)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void Execute(object parameter)
+        {
+            TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
+            myTextFieldTransViewModel.SimilarWords = myTextFieldTransViewModel.MyTranslatorProxy.FindSimilarWords(myTextFieldTransViewModel.TextToTranslate );
         }
     }
 }

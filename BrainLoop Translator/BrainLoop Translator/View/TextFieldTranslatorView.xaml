@@ -12,7 +12,8 @@
             TextInside, 
             ElementName=root, 
             UpdateSourceTrigger=PropertyChanged, 
-            Mode=TwoWay}" />
+            Mode=TwoWay}" >
+        </TextBox>
 
     </Grid>
 </UserControl>

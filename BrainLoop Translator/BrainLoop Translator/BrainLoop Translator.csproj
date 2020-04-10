@@ -63,11 +63,8 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Commands\TextFieldTranslatorCommands.cs" />
+    <Compile Include="ViewModel\Converters\IsDetectedToColorConverterMultiBinding.cs" />
     <Compile Include="ViewModel\TextFieldTranslatorViewModel.cs" />
-    <Compile Include="View\PushBinding\FreezableBinding.cs" />
-    <Compile Include="View\PushBinding\PushBinding.cs" />
-    <Compile Include="View\PushBinding\PushBindingCollection.cs" />
-    <Compile Include="View\PushBinding\PushBindingManager.cs" />
     <Compile Include="View\TranslatorMainView.xaml.cs">
       <DependentUpon>TranslatorMainView.xaml</DependentUpon>
     </Compile>
@@ -75,9 +72,6 @@
       <DependentUpon>TextFieldTranslatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainViewModelConverters.cs" />
-    <Compile Include="View\UserControls\TextBoxWithHelpText.xaml.cs">
-      <DependentUpon>TextBoxWithHelpText.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -102,10 +96,6 @@
     <Page Include="View\TextFieldTranslatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UserControls\TextBoxWithHelpText.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -145,7 +135,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Folder Include="View\UserControls\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

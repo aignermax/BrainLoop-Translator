@@ -210,6 +210,82 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ITranslatorService_GetAutoComplete_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ITranslatorService_GetAutoComplete_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ITranslatorService_FindSimilarWords_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_ITranslatorService_FindSimilarWords_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8733/TranslationWCFService/TranslatorService?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -235,6 +311,18 @@
   <wsdl:message name="ITranslatorService_GetLanguageList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLanguageListResponse" />
   </wsdl:message>
+  <wsdl:message name="ITranslatorService_GetAutoComplete_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAutoComplete" />
+  </wsdl:message>
+  <wsdl:message name="ITranslatorService_GetAutoComplete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAutoCompleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITranslatorService_FindSimilarWords_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindSimilarWords" />
+  </wsdl:message>
+  <wsdl:message name="ITranslatorService_FindSimilarWords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindSimilarWordsResponse" />
+  </wsdl:message>
   <wsdl:portType name="ITranslatorService">
     <wsdl:operation name="GetTranslation">
       <wsdl:input wsaw:Action="http://tempuri.org/ITranslatorService/GetTranslation" message="tns:ITranslatorService_GetTranslation_InputMessage" />
@@ -247,6 +335,14 @@
     <wsdl:operation name="GetLanguageList">
       <wsdl:input wsaw:Action="http://tempuri.org/ITranslatorService/GetLanguageList" message="tns:ITranslatorService_GetLanguageList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ITranslatorService/GetLanguageListResponse" message="tns:ITranslatorService_GetLanguageList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAutoComplete">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITranslatorService/GetAutoComplete" message="tns:ITranslatorService_GetAutoComplete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITranslatorService/GetAutoCompleteResponse" message="tns:ITranslatorService_GetAutoComplete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindSimilarWords">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITranslatorService/FindSimilarWords" message="tns:ITranslatorService_FindSimilarWords_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITranslatorService/FindSimilarWordsResponse" message="tns:ITranslatorService_FindSimilarWords_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_ITranslatorService" type="tns:ITranslatorService">
@@ -282,6 +378,28 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_ITranslatorService_GetLanguageList_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAutoComplete">
+      <soap12:operation soapAction="http://tempuri.org/ITranslatorService/GetAutoComplete" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_ITranslatorService_GetAutoComplete_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_ITranslatorService_GetAutoComplete_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindSimilarWords">
+      <soap12:operation soapAction="http://tempuri.org/ITranslatorService/FindSimilarWords" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_ITranslatorService_FindSimilarWords_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_ITranslatorService_FindSimilarWords_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

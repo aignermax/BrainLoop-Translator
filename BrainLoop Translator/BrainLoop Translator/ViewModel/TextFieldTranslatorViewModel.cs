@@ -14,24 +14,30 @@ namespace BrainLoop_Translator.ViewModel
        
         public TextFieldTranslatorViewModel()
         {
-            MyCMDTranslateNow = new CMDTranslateNow(MyTranslatorProxy);
-            MyCMDDetectLanguage = new CMDDetectLanguage(MyTranslatorProxy);
-
-
             // Load Available Languages from WCF Service.
             MyTranslatorProxy = new TranslatorServiceClient();
+            MyCMDTranslateNow = new CMDTranslateNow();
+            MyCMDDetectLanguage = new CMDDetectLanguage();
+            MyCMDGetAutoComplete = new CMDGetAutoComplete();
+            MyCMDGetSimilarWords = new CMDGetSimilarWords();
+            MyCMDAcceptAutoCompletedWord = new CMDAcceptAutoCompletedWord();
+
             string[] myLanguages = MyTranslatorProxy.GetLanguageList();
             AvailableLanguages = myLanguages.ToList<string>();
             if (AvailableLanguages.Count > 0)
             {
                 SelectedLanguage = AvailableLanguages[0];
             }
+            DetectedLanguage = "";
         }
 
         #region Properties
         public TranslatorServiceClient MyTranslatorProxy { get; set; }
         public CMDTranslateNow MyCMDTranslateNow { get; set; }
         public CMDDetectLanguage MyCMDDetectLanguage { get; set; }
+        public CMDGetAutoComplete MyCMDGetAutoComplete { get; set; }
+        public CMDGetSimilarWords MyCMDGetSimilarWords { get; set; }
+        public CMDAcceptAutoCompletedWord MyCMDAcceptAutoCompletedWord { get; set; }
 
         private string _textToTranslate;
 		public string TextToTranslate // text that has to be translated
@@ -41,10 +47,12 @@ namespace BrainLoop_Translator.ViewModel
                 NotifyPropertyChanged();
                 MyCMDTranslateNow.Execute(this);
                 MyCMDDetectLanguage.Execute(this);
+                MyCMDGetAutoComplete.Execute(this);
+                MyCMDGetSimilarWords.Execute(this);
             }
 		}
 
-        private string _translatedText;
+        private string _translatedText ="";
         public string TranslatedText
         {
             get { return _translatedText; }
@@ -62,7 +70,7 @@ namespace BrainLoop_Translator.ViewModel
             }
         }
 
-        private string _selectedLanguage;
+        private string _selectedLanguage ="";
         public string SelectedLanguage
         {
             get { return _selectedLanguage; }
@@ -72,7 +80,7 @@ namespace BrainLoop_Translator.ViewModel
             }
         }
 
-        private string _detectedLanguage;
+        private string _detectedLanguage ="";
         public string DetectedLanguage
         {
             get { return _detectedLanguage; }
@@ -81,7 +89,26 @@ namespace BrainLoop_Translator.ViewModel
             }
         }
 
-        #endregion 
+        private string _autoCompleteSuggestion ="";
+        public string AutoCompleteSuggestion
+        {
+            get { return _autoCompleteSuggestion; }
+            set { _autoCompleteSuggestion = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private string[] _similarWords;
+        public string[] SimilarWords
+        {
+            get { return _similarWords; }
+            set { _similarWords = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        #endregion
 
 
         #region NotifyPropertyChanged

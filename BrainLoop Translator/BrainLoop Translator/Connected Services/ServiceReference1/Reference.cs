@@ -22,16 +22,28 @@ namespace BrainLoop_Translator.ServiceReference1 {
         System.Threading.Tasks.Task<string> GetTranslationAsync(string targetLanguage, string textTotranslate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITranslatorService/DetectLanguage", ReplyAction="http://tempuri.org/ITranslatorService/DetectLanguageResponse")]
-        string DetectLanguage(string TextToDetect);
+        string DetectLanguage(string textToDetect);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITranslatorService/DetectLanguage", ReplyAction="http://tempuri.org/ITranslatorService/DetectLanguageResponse")]
-        System.Threading.Tasks.Task<string> DetectLanguageAsync(string TextToDetect);
+        System.Threading.Tasks.Task<string> DetectLanguageAsync(string textToDetect);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITranslatorService/GetLanguageList", ReplyAction="http://tempuri.org/ITranslatorService/GetLanguageListResponse")]
         string[] GetLanguageList();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITranslatorService/GetLanguageList", ReplyAction="http://tempuri.org/ITranslatorService/GetLanguageListResponse")]
         System.Threading.Tasks.Task<string[]> GetLanguageListAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITranslatorService/GetAutoComplete", ReplyAction="http://tempuri.org/ITranslatorService/GetAutoCompleteResponse")]
+        string GetAutoComplete(string startsWith);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITranslatorService/GetAutoComplete", ReplyAction="http://tempuri.org/ITranslatorService/GetAutoCompleteResponse")]
+        System.Threading.Tasks.Task<string> GetAutoCompleteAsync(string startsWith);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITranslatorService/FindSimilarWords", ReplyAction="http://tempuri.org/ITranslatorService/FindSimilarWordsResponse")]
+        string[] FindSimilarWords(string referenceWord);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITranslatorService/FindSimilarWords", ReplyAction="http://tempuri.org/ITranslatorService/FindSimilarWordsResponse")]
+        System.Threading.Tasks.Task<string[]> FindSimilarWordsAsync(string referenceWord);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,12 +81,12 @@ namespace BrainLoop_Translator.ServiceReference1 {
             return base.Channel.GetTranslationAsync(targetLanguage, textTotranslate);
         }
         
-        public string DetectLanguage(string TextToDetect) {
-            return base.Channel.DetectLanguage(TextToDetect);
+        public string DetectLanguage(string textToDetect) {
+            return base.Channel.DetectLanguage(textToDetect);
         }
         
-        public System.Threading.Tasks.Task<string> DetectLanguageAsync(string TextToDetect) {
-            return base.Channel.DetectLanguageAsync(TextToDetect);
+        public System.Threading.Tasks.Task<string> DetectLanguageAsync(string textToDetect) {
+            return base.Channel.DetectLanguageAsync(textToDetect);
         }
         
         public string[] GetLanguageList() {
@@ -83,6 +95,22 @@ namespace BrainLoop_Translator.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string[]> GetLanguageListAsync() {
             return base.Channel.GetLanguageListAsync();
+        }
+        
+        public string GetAutoComplete(string startsWith) {
+            return base.Channel.GetAutoComplete(startsWith);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetAutoCompleteAsync(string startsWith) {
+            return base.Channel.GetAutoCompleteAsync(startsWith);
+        }
+        
+        public string[] FindSimilarWords(string referenceWord) {
+            return base.Channel.FindSimilarWords(referenceWord);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> FindSimilarWordsAsync(string referenceWord) {
+            return base.Channel.FindSimilarWordsAsync(referenceWord);
         }
     }
 }

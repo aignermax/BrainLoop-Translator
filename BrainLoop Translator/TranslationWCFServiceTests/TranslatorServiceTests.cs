@@ -42,8 +42,8 @@ namespace TranslationWCFService.Tests
         public void FindSimilarWordsTest()
         {
             TranslatorService myservice = new TranslatorService();
-            Assert.AreEqual("hallo", myservice.FindSimilarWords("hallo",  "german")[0] );
-            Assert.AreEqual("hello", myservice.FindSimilarWords("hallo", "english")[0]);
+            Assert.AreEqual("hallo", myservice.FindSimilarWords("hallo")[0] );
+            Assert.AreEqual("habe", myservice.FindSimilarWords("hallo")[1]);
         }
 
         [TestMethod()]

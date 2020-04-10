@@ -41,14 +41,27 @@ namespace TranslationWCFService
 			}
 			return null;
 		}
-
-		public string[] FindSimilarWords(string ReferenceWord, string language)
+		/// <summary>
+		/// searches for some similar words that match best to the ReferenceWord.
+		/// All Words will be of the same language
+		/// this language will be guessed based on the ReferenceWord.
+		/// </summary>
+		/// <param name="ReferenceWord"></param>
+		/// <returns>array of similar words to the ReferenceWord</returns>
+		public string[] FindSimilarWords(string ReferenceWord)
 		{
-			if (string.IsNullOrWhiteSpace(language) || string.IsNullOrWhiteSpace(ReferenceWord)) return new string[0];
-			// find the language based on the string language, then return findsimilarwords();
-			Language myLan = Array.Find<Language>(MyTranslationDictionary.Languages, n => n.Name == language);
-			if(myLan == null) return new string[0];
-			return myLan.FindSimilarWords(ReferenceWord);
+			//- Show similar words to the entered word in the same language and sort them by relevance
+			// that's actually tricky, as we don't know for sure what language the user will be using. 
+			// we can  however search through our whole database, find the most matching word, get its language 
+			// and then make suggestions based on that language.
+			if (string.IsNullOrWhiteSpace(ReferenceWord)) return new string[0];
+			// , then return findsimilarwords();
+			Language l = MyTranslationDictionary.GuessLanguage(ReferenceWord);
+			if ( l!= null)
+			{
+				return l.FindSimilarWords(ReferenceWord);
+			}
+			return new string[0];
 		}
 
 		public string GetAutoComplete(string StartsWith)

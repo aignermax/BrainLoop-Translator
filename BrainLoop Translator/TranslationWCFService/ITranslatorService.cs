@@ -20,7 +20,7 @@ namespace TranslationWCFService
         string GetAutoComplete(string startsWith);
 
         [OperationContract]
-        string [] FindSimilarWords(string referenceWord, string language);
+        string [] FindSimilarWords(string referenceWord);
     }
 
     [DataContract]

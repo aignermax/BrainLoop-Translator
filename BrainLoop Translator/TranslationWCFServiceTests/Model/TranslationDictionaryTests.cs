@@ -113,7 +113,8 @@ namespace TranslationWCFService.Model.Tests
             try
             {
                 myTransDict.Save(null);
-            } catch (ArgumentNullException ane)
+            }
+            catch (ArgumentNullException ane)
             {
                 didThrowArgumentNulException = true;
             }
@@ -123,12 +124,13 @@ namespace TranslationWCFService.Model.Tests
             try
             {
                 myTransDict.Save(Path.GetTempFileName()); // here the file already exists.
-            } catch (IOException ex)
+            }
+            catch (IOException ex)
             {
                 didThrowIOException = true;
             }
             Assert.IsTrue(didThrowIOException, "Save command should throw an exception when the file already exists (no override)");
-            
+
         }
 
         [TestMethod()]
@@ -141,8 +143,8 @@ namespace TranslationWCFService.Model.Tests
             };
 
             string[] availablelangs = myTransDict.GetAvailableLanguages();
-            Assert.AreEqual(Array.Find(availablelangs, n => n == "german") , "german");
-            Assert.AreEqual(Array.Find(availablelangs, n => n == "chinese") , "chinese");
+            Assert.AreEqual(Array.Find(availablelangs, n => n == "german"), "german");
+            Assert.AreEqual(Array.Find(availablelangs, n => n == "chinese"), "chinese");
         }
 
         [TestMethod()]
@@ -163,6 +165,32 @@ namespace TranslationWCFService.Model.Tests
             };
             Assert.AreEqual("hallo", myTransDict.Translate("nihau", "german"));
             Assert.AreEqual("li", myTransDict.Translate("der", "chinese"));
+        }
+
+        [TestMethod()]
+        public void GuessLanguageTest()
+        {
+            TranslationDictionary myTransDict = new TranslationDictionary();
+            myTransDict.Languages = new Language[] {
+                new Language("german", new Word[] {
+                    new Word("hallo", "hello"),
+                    new Word("der", "the"),
+                    new Word("sein", "to be")
+                }) ,
+                new Language("chinese", new Word[] {
+                    new Word("nihau", "hello"),
+                    new Word("li", "the"),
+                    new Word("lihe", "to be")
+                })
+            };
+
+            Assert.AreEqual("chinese", myTransDict.GuessLanguage("niha").Name);
+            Assert.AreEqual("chinese", myTransDict.GuessLanguage("lih").Name);
+            Assert.AreEqual("chinese", myTransDict.GuessLanguage("lile").Name);
+            Assert.AreEqual("german", myTransDict.GuessLanguage("seid").Name);
+            Assert.AreEqual("german", myTransDict.GuessLanguage("seil").Name);
+            Assert.AreEqual("german", myTransDict.GuessLanguage("hallö").Name);
+            Assert.AreEqual("german", myTransDict.GuessLanguage("dea").Name);
         }
     }
 }

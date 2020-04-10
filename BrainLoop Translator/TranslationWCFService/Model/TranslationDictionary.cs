@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using TranslationWCFService.Helper;
 
 namespace TranslationWCFService.Model
 {
@@ -33,12 +34,42 @@ namespace TranslationWCFService.Model
             return null; // language not found
         }
         /// <summary>
+        /// guesses a language based on the entered word. It will always have an answer, however it might be wrong sometimes.
+        /// it compares all words in all languages with the word and computes the relative difference.
+        /// </summary>
+        /// <param name="referenceWord"></param>
+        /// <returns></returns>
+        public Language GuessLanguage(string referenceWord)
+        {
+            if (Languages == null || string.IsNullOrWhiteSpace(referenceWord)) return null;
+            referenceWord = referenceWord.Trim().ToLower();
+
+            double mostMatchingSimilarity = 0;
+            double s = 0;
+            Language mostMatchingLanguage = Languages[0];
+            foreach(Language lan in Languages)
+            {
+                foreach (Word myWord in lan.Words)
+                {
+                    s = SimilarityCalculator.CalculateSimilarity(referenceWord, myWord.Notation);
+                    if(s > mostMatchingSimilarity)
+                    {
+                        mostMatchingSimilarity = s;
+                        mostMatchingLanguage = lan;
+                    }
+                }
+            }
+            return mostMatchingLanguage;
+        }
+        /// <summary>
         /// returns the matching autocomplete word.
         /// </summary>
         /// <param name="text"></param>
         /// <returns>the matching word, or empty string, of nothing was found</returns>
         public string AutoComplete(string text)
         {
+            if (string.IsNullOrWhiteSpace(text)) return "";
+            text = text.Trim().ToLower();
             foreach (Language l in Languages)
             {
                 foreach(Word w in l.Words)

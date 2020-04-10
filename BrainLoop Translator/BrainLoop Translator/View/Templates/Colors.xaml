@@ -8,5 +8,7 @@
     
     <!--Brushes-->
     <SolidColorBrush x:Key="BrushGuiGrayDark" Color="{StaticResource GuiGrayDark}" />
+    <SolidColorBrush x:Key="BrushDetectionSuccess" Color="LightGreen" />
+    <SolidColorBrush x:Key="BrushDetectionFail" Color="OrangeRed" />
 
 </ResourceDictionary>
