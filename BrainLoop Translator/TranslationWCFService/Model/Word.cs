@@ -8,6 +8,14 @@ namespace TranslationWCFService.Model
 {
     public class Word
     {
+        public Word() : this("","")
+        {
+        }
+        public Word(string notation, string englishMeaning)
+        {
+            this.Notation = notation;
+            this.EnglishMeaning = englishMeaning;
+        }
         /// <summary>
         /// for optimization: the words will be trimmed and lowercase in our "databse" in order to match them faster.
         /// </summary>

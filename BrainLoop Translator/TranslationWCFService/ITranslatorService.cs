@@ -8,7 +8,7 @@ namespace TranslationWCFService
     {
         
         [OperationContract]
-        string GetTranslation(TranslationParameters translationParameters);
+        string GetTranslation(string targetLanguage, string textTotranslate);
 
         [OperationContract]
         string DetectLanguage(string TextToDetect);

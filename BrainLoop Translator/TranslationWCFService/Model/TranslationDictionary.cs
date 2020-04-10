@@ -18,18 +18,19 @@ namespace TranslationWCFService.Model
         /// </summary>
         /// <param name="word">the word to detect the langauge from</param>
         /// <returns>the detected Language or null if language was not found</returns>
-        public Language DetectLanguage(string word)
+        public FindLanguageResults DetectLanguage(string word)
         {
-            if (word == null) return null; // sanity check
-            word = word.Trim().ToLower();
+            if (string.IsNullOrWhiteSpace(word)) return null; // sanity check
+            word = word.Trim().ToLower(); // cleanup
             foreach (Language language in Languages)
             {
-                if (language.TryFindWord(word) != null)
+                Word detectedWord = language.TryFindWord(word);
+                if (detectedWord != null)
                 {
-                    return language;
+                    return new FindLanguageResults(language, detectedWord);
                 }
             }
-            return null;
+            return null; // language not found
         }
         /// <summary>
         /// returns the matching autocomplete word.
@@ -38,6 +39,7 @@ namespace TranslationWCFService.Model
         /// <returns></returns>
         public string AutoComplete(string text)
         {
+            if(string.IsNullOrWhiteSpace(text)) return "";
             // probably with this https://www.codeproject.com/Articles/44920/A-Reusable-WPF-Autocomplete-TextBox
             // find similar strings in list
             // https://stackoverflow.com/questions/51130295/c-sharp-find-like-strings-in-array
@@ -45,11 +47,12 @@ namespace TranslationWCFService.Model
         }
         /// <summary>
         /// Saves the current Object to XML for us to load it later on.
+        /// If the file already exists, exception will be thrown.
         /// </summary>
         /// <param name="fileName"></param>
         public void Save(string fileName)
         {
-            using (FileStream stream = new FileStream(fileName, FileMode.CreateNew))
+            using (FileStream stream = new FileStream(fileName, FileMode.CreateNew)) 
             {
                 XmlSerializer XML = new XmlSerializer(typeof(TranslationDictionary));
                 XML.Serialize(stream, this);
@@ -65,27 +68,52 @@ namespace TranslationWCFService.Model
             }
         }
 
-        /// <returns>the languages available in the Dictionary</returns>
+        /// <returns>the languages available in the Dictionary or Empty String Array, if no langauge available</returns>
         public string[] GetAvailableLanguages()
         {
-            string[] languageList = new string[Languages.Length];
-            for (int i = 0; i < Languages.Length; i++)
-            {
-                languageList[i] = Languages[i].Name;
-            }
-            return languageList;
+            if (Languages == null || Languages.Length < 1) return new string[0];
+            return Languages.Select(l => l.Name).ToArray();
         }
 
-        public string Translate(string wordToTranslate, string targetLanguage)
+        /// <summary>
+        /// translates a word into the targetlanguage and returns a string of the new translated word.
+        /// </summary>
+        /// <param name="wordToTranslate">source word to translate</param>
+        /// <param name="targetLanguageName">the name of the target language</param>
+        /// <returns>translated word as string or empty string if not found</returns>
+        public string Translate(string wordToTranslate, string targetLanguageName)
         {
-            targetLanguage = targetLanguage.Trim().ToLower();
+            if (string.IsNullOrWhiteSpace(wordToTranslate) || string.IsNullOrWhiteSpace(targetLanguageName)) return "";
+
+            targetLanguageName = targetLanguageName.Trim().ToLower();
             wordToTranslate = wordToTranslate.Trim().ToLower();
-            Language detectedLanguage = DetectLanguage(wordToTranslate);
-            detectedLanguage.TryFindWord(wordToTranslate);
-            // find the source Langauge
-            // find the source word in the language
-            // find the targetlanguage
-            // find the word with the same meaning in the target language
+            FindLanguageResults SourceDetectionResults = DetectLanguage(wordToTranslate);
+            if(SourceDetectionResults != null && SourceDetectionResults.DetectedWord != null)
+            {
+                Language TargetLanguage = Array.Find(Languages, n => n.Name.Equals(targetLanguageName));
+                if (TargetLanguage != null)
+                {
+                    Word translation = TargetLanguage.FindTranslation(SourceDetectionResults.DetectedWord.EnglishMeaning);
+                    if(translation != null)
+                    {
+                        return translation.Notation;
+                    } else
+                    {
+                        return "";
+                    }
+                }
+            }
+            return "";
         }
+    }
+    public class FindLanguageResults
+    {
+        public FindLanguageResults(Language detectedLanguage, Word detectedWord)
+        {
+            this.DetectedLanguage = detectedLanguage;
+            this.DetectedWord = detectedWord;
+        }
+        public Language DetectedLanguage { get; set; }
+        public Word DetectedWord { get; set; }
     }
 }

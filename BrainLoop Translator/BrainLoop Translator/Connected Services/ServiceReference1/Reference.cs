@@ -9,48 +9,17 @@
 //------------------------------------------------------------------------------
 
 namespace BrainLoop_Translator.ServiceReference1 {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TranslationParameters", Namespace="http://schemas.datacontract.org/2004/07/TranslationWCFService")]
-    [System.SerializableAttribute()]
-    public partial class TranslationParameters : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ITranslatorService")]
     public interface ITranslatorService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITranslatorService/GetTranslation", ReplyAction="http://tempuri.org/ITranslatorService/GetTranslationResponse")]
-        string GetTranslation(BrainLoop_Translator.ServiceReference1.TranslationParameters translationParameters);
+        string GetTranslation(string targetLanguage, string textTotranslate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITranslatorService/GetTranslation", ReplyAction="http://tempuri.org/ITranslatorService/GetTranslationResponse")]
-        System.Threading.Tasks.Task<string> GetTranslationAsync(BrainLoop_Translator.ServiceReference1.TranslationParameters translationParameters);
+        System.Threading.Tasks.Task<string> GetTranslationAsync(string targetLanguage, string textTotranslate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITranslatorService/DetectLanguage", ReplyAction="http://tempuri.org/ITranslatorService/DetectLanguageResponse")]
         string DetectLanguage(string TextToDetect);
@@ -92,12 +61,12 @@ namespace BrainLoop_Translator.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public string GetTranslation(BrainLoop_Translator.ServiceReference1.TranslationParameters translationParameters) {
-            return base.Channel.GetTranslation(translationParameters);
+        public string GetTranslation(string targetLanguage, string textTotranslate) {
+            return base.Channel.GetTranslation(targetLanguage, textTotranslate);
         }
         
-        public System.Threading.Tasks.Task<string> GetTranslationAsync(BrainLoop_Translator.ServiceReference1.TranslationParameters translationParameters) {
-            return base.Channel.GetTranslationAsync(translationParameters);
+        public System.Threading.Tasks.Task<string> GetTranslationAsync(string targetLanguage, string textTotranslate) {
+            return base.Channel.GetTranslationAsync(targetLanguage, textTotranslate);
         }
         
         public string DetectLanguage(string TextToDetect) {

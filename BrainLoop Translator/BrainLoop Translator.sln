@@ -8,11 +8,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainLoop Translator", "Bra
 		{0053B848-D4BF-4D57-9DC7-CFB254E1247C} = {0053B848-D4BF-4D57-9DC7-CFB254E1247C}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranslatorUnitTests", "TranslatorUnitTests\TranslatorUnitTests.csproj", "{EDC0CE18-7AE9-4775-9E80-68D8ACFF9870}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationWCFService", "TranslationWCFService\TranslationWCFService.csproj", "{0053B848-D4BF-4D57-9DC7-CFB254E1247C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationServerHOST", "TranslationServerHOST\TranslationServerHOST.csproj", "{3A7CFCB1-8DD0-4BDE-A30F-0225838E802F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationWCFServiceTests", "TranslationWCFServiceTests\TranslationWCFServiceTests.csproj", "{0109E73D-16A1-406C-AC54-6621DB5A5C80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{B586C955-80F9-4425-9A3A-E6CA057E9A66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,10 +26,6 @@ Global
 		{944CBC17-3161-49C8-A084-3A5504257822}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{944CBC17-3161-49C8-A084-3A5504257822}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{944CBC17-3161-49C8-A084-3A5504257822}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDC0CE18-7AE9-4775-9E80-68D8ACFF9870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDC0CE18-7AE9-4775-9E80-68D8ACFF9870}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDC0CE18-7AE9-4775-9E80-68D8ACFF9870}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDC0CE18-7AE9-4775-9E80-68D8ACFF9870}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0053B848-D4BF-4D57-9DC7-CFB254E1247C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0053B848-D4BF-4D57-9DC7-CFB254E1247C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0053B848-D4BF-4D57-9DC7-CFB254E1247C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -36,6 +34,14 @@ Global
 		{3A7CFCB1-8DD0-4BDE-A30F-0225838E802F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A7CFCB1-8DD0-4BDE-A30F-0225838E802F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A7CFCB1-8DD0-4BDE-A30F-0225838E802F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0109E73D-16A1-406C-AC54-6621DB5A5C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0109E73D-16A1-406C-AC54-6621DB5A5C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0109E73D-16A1-406C-AC54-6621DB5A5C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0109E73D-16A1-406C-AC54-6621DB5A5C80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B586C955-80F9-4425-9A3A-E6CA057E9A66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B586C955-80F9-4425-9A3A-E6CA057E9A66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B586C955-80F9-4425-9A3A-E6CA057E9A66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B586C955-80F9-4425-9A3A-E6CA057E9A66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

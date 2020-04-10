@@ -13,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BrainLoop_Translator.View
+namespace WpfApp1
 {
     /// <summary>
-    /// Interaktionslogik für MainWindowView.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class TranslatorMainView : Page
+    public partial class MainWindow : Window
     {
-        public TranslatorMainView()
+        public MainWindow()
         {
             InitializeComponent();
         }
-
-
-
     }
 }

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ITranslatorService.cs" />
+    <Compile Include="Model\DummyTranslationXMLGenerator.cs" />
     <Compile Include="Model\Language.cs" />
     <Compile Include="Model\TranslationDictionary.cs" />
     <Compile Include="Model\Word.cs" />
@@ -53,6 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="xml.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

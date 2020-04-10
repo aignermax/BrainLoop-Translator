@@ -1,32 +1,35 @@
 ﻿using BrainLoop_Translator.ServiceReference1;
 using BrainLoop_Translator.ViewModel.Commands;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace BrainLoop_Translator.ViewModel
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         public TextFieldTranslatorViewModel MyTextFieldTranslatorViewModel { get; set; }
         public CMDTranslateNow MyCMDTranslateNow { get; set; }
+        public CMDDetectLanguage MyCMDDetectLanguage { get; set; }
         public TranslatorServiceClient MyTranslatorProxy;
         public MainWindowViewModel()
         {
             Debug.WriteLine("Start");
-            MyCMDTranslateNow = new CMDTranslateNow();
             MyTextFieldTranslatorViewModel = new TextFieldTranslatorViewModel();
             MyTextFieldTranslatorViewModel.PropertyChanged += (object sender, PropertyChangedEventArgs e) =>
             {
                 if (e.PropertyName == nameof(MyTextFieldTranslatorViewModel.TextToTranslate))
                 {
-                    MyCMDTranslateNow.Execute( new CMDTranslateNowParams(MyTextFieldTranslatorViewModel.TextToTranslate, 
-                        MyTextFieldTranslatorViewModel.SelectedLanguage));
+                    MyCMDTranslateNow.Execute(MyTextFieldTranslatorViewModel);
+                    MyCMDDetectLanguage.Execute(MyTextFieldTranslatorViewModel);
                 }
-                if(e.PropertyName == nameof(MyTextFieldTranslatorViewModel.SelectedLanguage))
+                if (e.PropertyName == nameof(MyTextFieldTranslatorViewModel.SelectedLanguage))
                 {
-                    Debug.WriteLine("language Changed"); // run Command here .
+                    Debug.WriteLine("language Changed");
                 }
             };
 
@@ -34,6 +37,14 @@ namespace BrainLoop_Translator.ViewModel
             MyTranslatorProxy = new TranslatorServiceClient();
             string[] myLanguages = MyTranslatorProxy.GetLanguageList();
             MyTextFieldTranslatorViewModel.AvailableLanguages = myLanguages.ToList<string>();
+            if (MyTextFieldTranslatorViewModel.AvailableLanguages.Count > 0)
+            {
+                MyTextFieldTranslatorViewModel.SelectedLanguage = MyTextFieldTranslatorViewModel.AvailableLanguages[0];
+            }
+
+
+            MyCMDTranslateNow = new CMDTranslateNow(MyTranslatorProxy);
+            MyCMDDetectLanguage = new CMDDetectLanguage(MyTranslatorProxy);
         }
 
 

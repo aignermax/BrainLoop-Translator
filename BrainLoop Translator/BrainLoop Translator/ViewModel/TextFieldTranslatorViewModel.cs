@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 
 namespace BrainLoop_Translator.ViewModel
 {
-    public class TextFieldTranslatorViewModel
+    public class TextFieldTranslatorViewModel : INotifyPropertyChanged
     {
         public TextFieldTranslatorViewModel()
         {
+            Debug.WriteLine("TextFieldTranslator ViewModel created");
         }
 		private string _textToTranslate;
 		public string TextToTranslate // text that has to be translated
@@ -45,7 +48,14 @@ namespace BrainLoop_Translator.ViewModel
             }
         }
 
-
+        private string _detectedLanguage;
+        public string DetectedLanguage
+        {
+            get { return _detectedLanguage; }
+            set { _detectedLanguage = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         #region NotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

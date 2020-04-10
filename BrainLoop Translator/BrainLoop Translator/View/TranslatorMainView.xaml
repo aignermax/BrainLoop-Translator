@@ -23,10 +23,10 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="translate" FontSize="11" Style="{StaticResource GrayBigText}"/>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding DetectedLanguage, Mode=TwoWay}" FontSize="11" Style="{StaticResource GrayBigText}"/>
         <local:TextFieldTranslatorView Grid.Row="1" TextInside="{Binding TextToTranslate, Mode=TwoWay}"/>
-        <local:TextFieldTranslatorView Grid.Row="1" Grid.Column="1" TextInside="{Binding TranslatedText , Mode=TwoWay}"/>
+        <local:TextFieldTranslatorView Grid.Row="1" Grid.Column="1" TextInside="{Binding TranslatedText , Mode=TwoWay}" IsEnabled="False"/>
         <ComboBox Grid.Column="1" ItemsSource="{Binding AvailableLanguages}" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"/>
     </Grid>
 </Page>

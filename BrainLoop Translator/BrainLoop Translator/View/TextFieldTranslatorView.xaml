@@ -8,6 +8,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBox Text="{Binding Path=TextInside, ElementName=root, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        <TextBox Text="{Binding 
+            TextInside, 
+            ElementName=root, 
+            UpdateSourceTrigger=PropertyChanged, 
+            Mode=TwoWay}" />
+
     </Grid>
 </UserControl>

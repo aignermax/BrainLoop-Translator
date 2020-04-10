@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -13,8 +14,18 @@ namespace TranslationWCFService
     {
 		public TranslationDictionary MyTranslationDictionary;
 		public TranslatorService()
-		{ 
-			MyTranslationDictionary = TranslationDictionary.LoadNewDictionary("TranslationDatabaseResources.xml"); 
+		{
+			string XMLFileName = "TranslationDataBaseResources.xml";
+			if (File.Exists(XMLFileName))
+			{
+				MyTranslationDictionary = TranslationDictionary.LoadNewDictionary(XMLFileName);
+			} else
+			{
+				DummyTranslationXMLGenerator mygen = new DummyTranslationXMLGenerator();
+				mygen.GenerateDummyData(XMLFileName);
+				MyTranslationDictionary = TranslationDictionary.LoadNewDictionary(XMLFileName);
+			}
+			
 		}
 		/// <param name="TextToDetect">the word or the first word of a sentence to detect the language from</param>
 		/// <returns>The name of the detected language or EMPTY string if not found</returns>
@@ -23,10 +34,10 @@ namespace TranslationWCFService
 			if (String.IsNullOrEmpty(TextToDetect))
 				return ""; // If you prefer brackets here, please let me know
 
-			Language DetectedLanguage = MyTranslationDictionary.DetectLanguage(TextToDetect.Split(' ')[0]);
-			if(DetectedLanguage != null)
+			FindLanguageResults detectResults = MyTranslationDictionary.DetectLanguage(TextToDetect.Split(' ')[0]);
+			if(detectResults != null && detectResults.DetectedLanguage != null)
 			{
-				return DetectedLanguage.Name;
+				return detectResults.DetectedLanguage.Name;
 			}
 			return null;
 		}
@@ -40,9 +51,9 @@ namespace TranslationWCFService
 			return MyTranslationDictionary.GetAvailableLanguages();
 		}
 
-		public string GetTranslation(TranslationParameters translationParameters)
+		public string GetTranslation(string targetLanguage, string textTotranslate)
 		{
-			return MyTranslationDictionary.Translate(translationParameters.TextToTranslate, translationParameters.TargetLanguage);
+			return MyTranslationDictionary.Translate(textTotranslate, targetLanguage);
 		}
 	}
 }

@@ -56,8 +56,5 @@
       <Name>TranslationWCFService</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="xml.xml" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

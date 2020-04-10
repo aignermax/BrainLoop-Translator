@@ -22,12 +22,11 @@
     <MetadataSource Address="http://localhost:8733/TranslationWCFService/TranslatorService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TranslatorService.xsd" MetadataType="Schema" ID="7254ba35-aecb-4efb-be1d-1d2b8f77c5f4" SourceId="1" SourceUrl="http://localhost:8733/TranslationWCFService/TranslatorService?xsd=xsd3" />
-    <MetadataFile FileName="TranslatorService1.xsd" MetadataType="Schema" ID="59179874-ea6f-4c0a-a8cc-b010e7fbea4e" SourceId="1" SourceUrl="http://localhost:8733/TranslationWCFService/TranslatorService?xsd=xsd0" />
     <MetadataFile FileName="TranslatorService2.xsd" MetadataType="Schema" ID="92d70853-1fe3-4c5b-bf4d-e71d075468f6" SourceId="1" SourceUrl="http://localhost:8733/TranslationWCFService/TranslatorService?xsd=xsd1" />
     <MetadataFile FileName="TranslatorService.wsdl" MetadataType="Wsdl" ID="b328b48f-5c4e-4ccd-8149-509615c0175b" SourceId="1" SourceUrl="http://localhost:8733/TranslationWCFService/TranslatorService?wsdl" />
-    <MetadataFile FileName="TranslatorService.disco" MetadataType="Disco" ID="c8b5b4a2-e978-4b38-ab24-13d864228097" SourceId="1" SourceUrl="http://localhost:8733/TranslationWCFService/TranslatorService?disco" />
     <MetadataFile FileName="TranslatorService3.xsd" MetadataType="Schema" ID="c808be28-28af-4e82-8511-b6ed844ef7c7" SourceId="1" SourceUrl="http://localhost:8733/TranslationWCFService/TranslatorService?xsd=xsd2" />
+    <MetadataFile FileName="TranslatorService.disco" MetadataType="Disco" ID="c8b5b4a2-e978-4b38-ab24-13d864228097" SourceId="1" SourceUrl="http://localhost:8733/TranslationWCFService/TranslatorService?disco" />
+    <MetadataFile FileName="TranslatorService1.xsd" MetadataType="Schema" ID="59179874-ea6f-4c0a-a8cc-b010e7fbea4e" SourceId="1" SourceUrl="http://localhost:8733/TranslationWCFService/TranslatorService?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
