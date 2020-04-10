@@ -57,7 +57,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Model\DummyTranslationXMLGeneratorTests.cs" />
+    <Compile Include="Model\LanguageTests.cs" />
+    <Compile Include="Model\TranslationDictionaryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TranslatorServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

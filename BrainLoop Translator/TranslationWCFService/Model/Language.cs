@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TranslationWCFService.Helper;
 
 namespace TranslationWCFService.Model
 {
@@ -35,10 +37,38 @@ namespace TranslationWCFService.Model
         /// finds similar words of the same language
         /// </summary>
         /// <param name="word"></param>
-        /// <returns>array of similar words</returns>
-        public string[] FindSimilarWords(string word)
+        /// <param name="maxResultElements">the maximum length of the result array</param>
+        /// <param name="minSimilarity">the minimum required similarity of the result words. 1.0d = must be same word, 0.0d = all words accepted</param>
+        /// <returns>array of similar words or empty array if nothing was found</returns>
+        public string[] FindSimilarWords(string word , int maxResultElements = 5, double minSimilarity = 0.2d)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(word) || Words == null || Words.Length == 0)
+                return new string[0];
+
+            // 1. calculate the amount of steps to transform one string into the other
+            Dictionary<Word, double> wordTransformCosts = new Dictionary<Word, double>();
+            string[] SimilarWords = new string[Words.Length];
+            // go through the Words and look if one is similar and sort them by relevance. 
+            foreach(Word w in Words)
+            {
+                double similarity = SimilarityCalculator.CalculateSimilarity(word, w.Notation);
+                if(similarity >= minSimilarity) // it should  be at least 20% similar
+                {
+                    wordTransformCosts.Add(w, similarity);
+                }
+            }
+            // sort that dictionary, convert the words into the string array.
+            int j = 0;
+            foreach (KeyValuePair<Word, double> SortedWord in wordTransformCosts.OrderByDescending(key => key.Value))
+            {
+                if (j > maxResultElements) // take 5 words at max.
+                {
+                    break;
+                }
+                SimilarWords[j] = SortedWord.Key.Notation;
+                j++;
+            }
+            return SimilarWords;
         }
 
         /// <summary>
@@ -49,6 +79,7 @@ namespace TranslationWCFService.Model
         public Word FindTranslation(string englishMeaning)
         {
             if (string.IsNullOrWhiteSpace(englishMeaning) || Words == null || Words.Length < 1) return null;
+            englishMeaning = englishMeaning.Trim().ToLower();
             return Array.Find(Words, n => n.EnglishMeaning.Equals(englishMeaning));
         }
         /// <summary>

@@ -12,7 +12,8 @@ namespace BrainLoop_Translator.ViewModel
         {
             Debug.WriteLine("TextFieldTranslator ViewModel created");
         }
-		private string _textToTranslate;
+        #region Properties
+        private string _textToTranslate;
 		public string TextToTranslate // text that has to be translated
 		{
 			get { return _textToTranslate; }
@@ -56,6 +57,9 @@ namespace BrainLoop_Translator.ViewModel
                 NotifyPropertyChanged();
             }
         }
+
+        #endregion 
+
 
         #region NotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
