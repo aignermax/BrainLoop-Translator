@@ -63,4 +63,31 @@ namespace BrainLoop_Translator.ViewModel.Commands
             Debug.WriteLine("detected Language: " + myTextFieldTransViewModel.DetectedLanguage);
         }
     }
+
+    public class CMDGetAutoComplete: ICommand
+    {
+        public event EventHandler CanExecuteChanged;
+        private TranslatorServiceClient translatorServiceClient;
+        public CMDGetAutoComplete(TranslatorServiceClient WCFservice)
+        {
+            translatorServiceClient = WCFservice;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            if (parameter != null && parameter is TextFieldTranslatorViewModel)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void Execute(object parameter)
+        {
+            // detect language
+            TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
+            myTextFieldTransViewModel.DetectedLanguage = translatorServiceClient.DetectLanguage(myTextFieldTransViewModel.TextToTranslate);
+            Debug.WriteLine("detected Language: " + myTextFieldTransViewModel.DetectedLanguage);
+        }
+    }
 }

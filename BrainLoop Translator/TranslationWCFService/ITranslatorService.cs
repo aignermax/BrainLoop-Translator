@@ -11,10 +11,16 @@ namespace TranslationWCFService
         string GetTranslation(string targetLanguage, string textTotranslate);
 
         [OperationContract]
-        string DetectLanguage(string TextToDetect);
+        string DetectLanguage(string textToDetect);
 
         [OperationContract]
         string[] GetLanguageList();
+
+        [OperationContract]
+        string GetAutoComplete(string startsWith);
+
+        [OperationContract]
+        string [] FindSimilarWords(string referenceWord, string language);
     }
 
     [DataContract]

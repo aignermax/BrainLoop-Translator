@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using BrainLoop_Translator.ServiceReference1;
+using BrainLoop_Translator.ViewModel.Commands;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 
@@ -8,17 +11,36 @@ namespace BrainLoop_Translator.ViewModel
 {
     public class TextFieldTranslatorViewModel : INotifyPropertyChanged
     {
+       
         public TextFieldTranslatorViewModel()
         {
-            Debug.WriteLine("TextFieldTranslator ViewModel created");
+            MyCMDTranslateNow = new CMDTranslateNow(MyTranslatorProxy);
+            MyCMDDetectLanguage = new CMDDetectLanguage(MyTranslatorProxy);
+
+
+            // Load Available Languages from WCF Service.
+            MyTranslatorProxy = new TranslatorServiceClient();
+            string[] myLanguages = MyTranslatorProxy.GetLanguageList();
+            AvailableLanguages = myLanguages.ToList<string>();
+            if (AvailableLanguages.Count > 0)
+            {
+                SelectedLanguage = AvailableLanguages[0];
+            }
         }
+
         #region Properties
+        public TranslatorServiceClient MyTranslatorProxy { get; set; }
+        public CMDTranslateNow MyCMDTranslateNow { get; set; }
+        public CMDDetectLanguage MyCMDDetectLanguage { get; set; }
+
         private string _textToTranslate;
 		public string TextToTranslate // text that has to be translated
 		{
 			get { return _textToTranslate; }
 			set { _textToTranslate = value; 
-                NotifyPropertyChanged(); 
+                NotifyPropertyChanged();
+                MyCMDTranslateNow.Execute(this);
+                MyCMDDetectLanguage.Execute(this);
             }
 		}
 
@@ -46,6 +68,7 @@ namespace BrainLoop_Translator.ViewModel
             get { return _selectedLanguage; }
             set { _selectedLanguage = value;
                 NotifyPropertyChanged();
+                MyCMDTranslateNow.Execute(this);
             }
         }
 

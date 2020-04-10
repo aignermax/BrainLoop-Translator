@@ -36,14 +36,20 @@ namespace TranslationWCFService.Model
         /// returns the matching autocomplete word.
         /// </summary>
         /// <param name="text"></param>
-        /// <returns></returns>
+        /// <returns>the matching word, or empty string, of nothing was found</returns>
         public string AutoComplete(string text)
         {
-            if(string.IsNullOrWhiteSpace(text)) return "";
-            // probably with this https://www.codeproject.com/Articles/44920/A-Reusable-WPF-Autocomplete-TextBox
-            // find similar strings in list
-            // https://stackoverflow.com/questions/51130295/c-sharp-find-like-strings-in-array
-            throw new NotImplementedException();
+            foreach (Language l in Languages)
+            {
+                foreach(Word w in l.Words)
+                {
+                    if( w.Notation.StartsWith(text))
+                    {
+                        return w.Notation;
+                    }
+                }
+            }
+            return "";
         }
         /// <summary>
         /// Saves the current Object to XML for us to load it later on.
