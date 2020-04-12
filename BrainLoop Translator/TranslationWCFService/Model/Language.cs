@@ -42,29 +42,31 @@ namespace TranslationWCFService.Model
         /// <returns>array of similar words or empty array if nothing was found</returns>
         public string[] FindSimilarWords(string word , int maxResultElements = 5, double minSimilarity = 0.2d)
         {
-            if (string.IsNullOrWhiteSpace(word) || Words == null || Words.Length == 0)
+            if (string.IsNullOrWhiteSpace(word) || Words == null || Words.Length == 0 || maxResultElements < 1  )
                 return new string[0];
 
             // 1. calculate the amount of steps to transform one string into the other
             Dictionary<Word, double> wordTransformCosts = new Dictionary<Word, double>();
-            string[] SimilarWords = new string[Words.Length];
             // go through the Words and look if one is similar and sort them by relevance. 
+            int WordCounter = 0;
             foreach(Word w in Words)
             {
                 double similarity = SimilarityCalculator.CalculateSimilarity(word, w.Notation);
                 if(similarity >= minSimilarity) // it should  be at least 20% similar
                 {
                     wordTransformCosts.Add(w, similarity);
+                    WordCounter++;
+                }
+                if (WordCounter >= maxResultElements) // take 5 words at max.
+                {
+                    break;
                 }
             }
+            string[] SimilarWords = new string[WordCounter];
             // sort that dictionary, convert the words into the string array.
             int j = 0;
             foreach (KeyValuePair<Word, double> SortedWord in wordTransformCosts.OrderByDescending(key => key.Value))
             {
-                if (j > maxResultElements) // take 5 words at max.
-                {
-                    break;
-                }
                 SimilarWords[j] = SortedWord.Key.Notation;
                 j++;
             }

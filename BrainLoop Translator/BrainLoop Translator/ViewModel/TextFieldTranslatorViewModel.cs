@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows.Controls;
 
 namespace BrainLoop_Translator.ViewModel
@@ -22,13 +23,17 @@ namespace BrainLoop_Translator.ViewModel
             MyCMDGetSimilarWords = new CMDGetSimilarWords();
             MyCMDAcceptAutoCompletedWord = new CMDAcceptAutoCompletedWord();
 
-            string[] myLanguages = MyTranslatorProxy.GetLanguageList();
-            AvailableLanguages = myLanguages.ToList<string>();
-            if (AvailableLanguages.Count > 0)
-            {
-                SelectedLanguage = AvailableLanguages[0];
-            }
+            ThreadPool.QueueUserWorkItem(new WaitCallback( (object param) => {
+                string[] myLanguages = MyTranslatorProxy.GetLanguageList();
+                AvailableLanguages = myLanguages.ToList<string>();
+                if (AvailableLanguages.Count > 0)
+                {
+                    SelectedLanguage = AvailableLanguages[0];
+                }
+            }));
+            
             DetectedLanguage = "";
+            AutoCompleteSuggestion = "Write a word here to get it translated";
         }
 
         #region Properties
@@ -106,6 +111,17 @@ namespace BrainLoop_Translator.ViewModel
                 NotifyPropertyChanged();
             }
         }
+
+        private bool _isSimilarWordsOpen;
+
+        public bool IsSimilarWordsOpen
+        {
+            get { return _isSimilarWordsOpen; }
+            set { _isSimilarWordsOpen = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
 
         #endregion

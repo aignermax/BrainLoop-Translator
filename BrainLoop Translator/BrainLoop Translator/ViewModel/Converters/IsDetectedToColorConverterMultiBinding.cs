@@ -29,6 +29,10 @@ namespace BrainLoop_Translator.ViewModel.Converters
                 {
                     values[0] = "";
                 }
+                if(values[3] == null)
+                {
+                    values[3] = "";
+                }
                 if (values[0] is string && values[1] is Brush && values[2] is Brush && values[3] is string)
                 {
                     string DetectedLanguage = (string)values[0];
@@ -42,6 +46,10 @@ namespace BrainLoop_Translator.ViewModel.Converters
                     else if(string.IsNullOrWhiteSpace(TextToTranslate) == false)
                     {
                         result = BrushDetectionFail;
+                    }
+                    else
+                    {
+                        result = BrushDetectionSuccess;
                     }
 
                 }

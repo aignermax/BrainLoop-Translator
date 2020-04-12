@@ -40,8 +40,8 @@ namespace TranslationWCFService.Model.Tests
             myLanguage.FindSimilarWords("");
             myLanguage.FindSimilarWords("fdfadfdasf", -5, 100);
             myLanguage.FindSimilarWords(null);
-            string[] similarWords = myLanguage.FindSimilarWords("hallo");
-            Assert.IsTrue(similarWords.Length > 0);
+            string[] similarWords = myLanguage.FindSimilarWords("hallo",5,0.1);
+            Assert.AreEqual(5, similarWords.Length);
             Assert.AreEqual("hallo", similarWords[0]); // hallo should be very similar to hallo. the rest should also be similar.. 
             Debug.WriteLine("More similar words that he found: ");
             foreach (string s in similarWords)

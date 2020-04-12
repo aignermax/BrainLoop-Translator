@@ -18,16 +18,18 @@
     </Page.Resources>
     <Grid DataContext="{Binding MyTextFieldTranslatorViewModel}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding DetectedLanguage, Mode=TwoWay}" Margin="5" Style="{StaticResource GrayBigText}" />
-        <TextBox Grid.Row="1" Text="{Binding AutoCompleteSuggestion}" IsReadOnly="True" Foreground="Gray" Margin="5" >
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding DetectedLanguage}" Margin="5" Style="{StaticResource GrayBigText}" />
+        <ComboBox Grid.Row="2" ItemsSource="{Binding SimilarWords}" IsDropDownOpen="{Binding IsSimilarWordsOpen}" Margin="5" Height="25"/>
+        <TextBox Grid.Row="2" Text="{Binding AutoCompleteSuggestion}" IsReadOnly="True" Foreground="Gray" Margin="5" >
             <TextBox.Background>
                 <MultiBinding Converter="{StaticResource myIsDetectedToColorConverter}" >
                     <Binding Path="DetectedLanguage"/>
@@ -37,14 +39,15 @@
                 </MultiBinding>
             </TextBox.Background>
         </TextBox>
-        <TextBox Grid.Row="1" Text="{Binding TextToTranslate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" Margin="5" >
+        <TextBox Grid.Row="2" Text="{Binding TextToTranslate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" Margin="5" >
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding MyCMDAcceptAutoCompletedWord }" Key="Enter" CommandParameter="{Binding}"/>
                 <KeyBinding Command="{Binding MyCMDAcceptAutoCompletedWord }" Key="Tab" CommandParameter="{Binding}"/>
             </TextBox.InputBindings>
         </TextBox>
 
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TranslatedText , Mode=TwoWay}" IsReadOnly="true" Margin="5"/>
-        <ComboBox Grid.Column="1" ItemsSource="{Binding AvailableLanguages}" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" Background="Transparent" BorderBrush="Transparent" Margin="5" />
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding TranslatedText , Mode=TwoWay}" IsReadOnly="true" Margin="5"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailableLanguages}" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" Background="Transparent" BorderBrush="Transparent" Margin="5" />
+       
     </Grid>
 </Page>

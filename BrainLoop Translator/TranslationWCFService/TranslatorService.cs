@@ -59,7 +59,7 @@ namespace TranslationWCFService
 			Language l = MyTranslationDictionary.GuessLanguage(ReferenceWord);
 			if ( l!= null)
 			{
-				return l.FindSimilarWords(ReferenceWord);
+				return l.FindSimilarWords(ReferenceWord,5,0.3d);
 			}
 			return new string[0];
 		}

@@ -124,6 +124,14 @@ namespace BrainLoop_Translator.ViewModel.Commands
             {
                 TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
                 myTextFieldTransViewModel.SimilarWords = myTextFieldTransViewModel.MyTranslatorProxy.FindSimilarWords(myTextFieldTransViewModel.TextToTranslate);
+                if(myTextFieldTransViewModel.SimilarWords.Length > 0)
+                {
+                    myTextFieldTransViewModel.IsSimilarWordsOpen = true;
+                }
+                else
+                {
+                    myTextFieldTransViewModel.IsSimilarWordsOpen = false;
+                }
             }));
         }
     }
