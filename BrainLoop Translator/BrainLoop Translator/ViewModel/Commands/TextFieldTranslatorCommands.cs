@@ -1,6 +1,7 @@
 ﻿using BrainLoop_Translator.ServiceReference1;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,12 @@ namespace BrainLoop_Translator.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            // translate
-            TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
-            myTextFieldTransViewModel.TranslatedText = myTextFieldTransViewModel.MyTranslatorProxy.GetTranslation(myTextFieldTransViewModel.SelectedLanguage, myTextFieldTransViewModel.TextToTranslate);
+            ThreadPool.QueueUserWorkItem(new WaitCallback((object stateInfo) =>
+            { // make async
+                // translate
+                TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
+                myTextFieldTransViewModel.TranslatedText = myTextFieldTransViewModel.MyTranslatorProxy.GetTranslation(myTextFieldTransViewModel.SelectedLanguage, myTextFieldTransViewModel.TextToTranslate);
+            }));
         }
     }
 
@@ -46,9 +50,12 @@ namespace BrainLoop_Translator.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            // detect language
-            TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
-            myTextFieldTransViewModel.DetectedLanguage = myTextFieldTransViewModel.MyTranslatorProxy.DetectLanguage(myTextFieldTransViewModel.TextToTranslate);
+            ThreadPool.QueueUserWorkItem(new WaitCallback((object stateInfo) =>
+            {
+                // detect language
+                TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
+                myTextFieldTransViewModel.DetectedLanguage = myTextFieldTransViewModel.MyTranslatorProxy.DetectLanguage(myTextFieldTransViewModel.TextToTranslate);
+            }));
         }
     }
 
@@ -67,8 +74,11 @@ namespace BrainLoop_Translator.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
-            myTextFieldTransViewModel.AutoCompleteSuggestion = myTextFieldTransViewModel.MyTranslatorProxy.GetAutoComplete (myTextFieldTransViewModel.TextToTranslate);
+            ThreadPool.QueueUserWorkItem(new WaitCallback((object stateInfo) =>
+            {
+                TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
+                myTextFieldTransViewModel.AutoCompleteSuggestion = myTextFieldTransViewModel.MyTranslatorProxy.GetAutoComplete(myTextFieldTransViewModel.TextToTranslate);
+            }));
         }
     }
     public class CMDAcceptAutoCompletedWord : ICommand
@@ -85,11 +95,14 @@ namespace BrainLoop_Translator.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
-            if(string.IsNullOrEmpty(myTextFieldTransViewModel.AutoCompleteSuggestion) == false)
+            ThreadPool.QueueUserWorkItem(new WaitCallback((object stateInfo) =>
             {
-                myTextFieldTransViewModel.TextToTranslate = myTextFieldTransViewModel.AutoCompleteSuggestion;
-            }
+                TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
+                if (string.IsNullOrEmpty(myTextFieldTransViewModel.AutoCompleteSuggestion) == false)
+                {
+                    myTextFieldTransViewModel.TextToTranslate = myTextFieldTransViewModel.AutoCompleteSuggestion;
+                }
+            }));
         }
     }
     public class CMDGetSimilarWords : ICommand
@@ -107,8 +120,11 @@ namespace BrainLoop_Translator.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
-            myTextFieldTransViewModel.SimilarWords = myTextFieldTransViewModel.MyTranslatorProxy.FindSimilarWords(myTextFieldTransViewModel.TextToTranslate );
+            ThreadPool.QueueUserWorkItem(new WaitCallback((object stateInfo) =>
+            {
+                TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
+                myTextFieldTransViewModel.SimilarWords = myTextFieldTransViewModel.MyTranslatorProxy.FindSimilarWords(myTextFieldTransViewModel.TextToTranslate);
+            }));
         }
     }
 }
