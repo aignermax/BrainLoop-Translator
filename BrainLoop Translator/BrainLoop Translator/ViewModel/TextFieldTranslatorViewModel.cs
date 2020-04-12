@@ -21,7 +21,6 @@ namespace BrainLoop_Translator.ViewModel
             MyCMDDetectLanguage = new CMDDetectLanguage();
             MyCMDGetAutoComplete = new CMDGetAutoComplete();
             MyCMDGetSimilarWords = new CMDGetSimilarWords();
-            MyCMDAcceptAutoCompletedWord = new CMDAcceptAutoCompletedWord();
 
             ThreadPool.QueueUserWorkItem(new WaitCallback( (object param) => {
                 string[] myLanguages = MyTranslatorProxy.GetLanguageList();
@@ -42,7 +41,6 @@ namespace BrainLoop_Translator.ViewModel
         public CMDDetectLanguage MyCMDDetectLanguage { get; set; }
         public CMDGetAutoComplete MyCMDGetAutoComplete { get; set; }
         public CMDGetSimilarWords MyCMDGetSimilarWords { get; set; }
-        public CMDAcceptAutoCompletedWord MyCMDAcceptAutoCompletedWord { get; set; }
 
         private string _textToTranslate;
 		public string TextToTranslate // text that has to be translated
@@ -111,17 +109,6 @@ namespace BrainLoop_Translator.ViewModel
                 NotifyPropertyChanged();
             }
         }
-
-        private bool _isSimilarWordsOpen;
-
-        public bool IsSimilarWordsOpen
-        {
-            get { return _isSimilarWordsOpen; }
-            set { _isSimilarWordsOpen = value;
-                NotifyPropertyChanged();
-            }
-        }
-
 
 
         #endregion

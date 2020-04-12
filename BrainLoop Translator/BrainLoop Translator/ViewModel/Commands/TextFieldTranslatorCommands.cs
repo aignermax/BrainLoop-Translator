@@ -1,4 +1,5 @@
 ﻿using BrainLoop_Translator.ServiceReference1;
+using BrainLoop_Translator.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -81,30 +82,6 @@ namespace BrainLoop_Translator.ViewModel.Commands
             }));
         }
     }
-    public class CMDAcceptAutoCompletedWord : ICommand
-    {
-        public event EventHandler CanExecuteChanged;
-        public bool CanExecute(object parameter)
-        {
-            if (parameter != null && parameter is TextFieldTranslatorViewModel)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public void Execute(object parameter)
-        {
-            ThreadPool.QueueUserWorkItem(new WaitCallback((object stateInfo) =>
-            {
-                TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
-                if (string.IsNullOrEmpty(myTextFieldTransViewModel.AutoCompleteSuggestion) == false)
-                {
-                    myTextFieldTransViewModel.TextToTranslate = myTextFieldTransViewModel.AutoCompleteSuggestion;
-                }
-            }));
-        }
-    }
     public class CMDGetSimilarWords : ICommand
     {
         public event EventHandler CanExecuteChanged;
@@ -124,14 +101,6 @@ namespace BrainLoop_Translator.ViewModel.Commands
             {
                 TextFieldTranslatorViewModel myTextFieldTransViewModel = (TextFieldTranslatorViewModel)parameter;
                 myTextFieldTransViewModel.SimilarWords = myTextFieldTransViewModel.MyTranslatorProxy.FindSimilarWords(myTextFieldTransViewModel.TextToTranslate);
-                if(myTextFieldTransViewModel.SimilarWords.Length > 0)
-                {
-                    myTextFieldTransViewModel.IsSimilarWordsOpen = true;
-                }
-                else
-                {
-                    myTextFieldTransViewModel.IsSimilarWordsOpen = false;
-                }
             }));
         }
     }

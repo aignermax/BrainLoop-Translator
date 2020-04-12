@@ -62,7 +62,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Commands\CMDAcceptAutoCompletedWord.cs" />
     <Compile Include="ViewModel\Commands\TextFieldTranslatorCommands.cs" />
+    <Compile Include="ViewModel\Converters\AcceptAutoCompleteConverter.cs" />
     <Compile Include="ViewModel\Converters\IsDetectedToColorConverterMultiBinding.cs" />
     <Compile Include="ViewModel\TextFieldTranslatorViewModel.cs" />
     <Compile Include="View\TranslatorMainView.xaml.cs">

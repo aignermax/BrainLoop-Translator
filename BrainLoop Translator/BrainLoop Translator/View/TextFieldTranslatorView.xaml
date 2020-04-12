@@ -3,17 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:conv ="clr-namespace:BrainLoop_Translator.ViewModel.Converters"
              x:Name="root"
              xmlns:local="clr-namespace:BrainLoop_Translator.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBox Text="{Binding 
-            TextInside, 
-            ElementName=root, 
-            UpdateSourceTrigger=PropertyChanged, 
-            Mode=TwoWay}" >
-        </TextBox>
 
+    <UserControl.Resources>
+        <conv:IsDetectedToColorConverterMultiBinding x:Key="myIsDetectedToColorConverter" />
+        <conv:AcceptAutoCompleteConverter x:Key="myAcceptAutoCompleteConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <ComboBox Grid.Row="2" ItemsSource="{Binding SimilarWords, ElementName=root}" IsDropDownOpen="{Binding IsSimilarWordsOpen, ElementName=root}" SelectedItem="{Binding SimilarWordsSelectedItem, ElementName=root}" Margin="5" Height="25"/>
+        <TextBox Grid.Row="2" Text="{Binding AutoCompleteSuggestion, ElementName=root}" IsReadOnly="True" Foreground="Gray" Margin="5" >
+            <TextBox.Background>
+                <MultiBinding Converter="{StaticResource myIsDetectedToColorConverter}" >
+                    <Binding Path="DetectedLanguage" ElementName="root"/>
+                    <Binding Source="{StaticResource BrushDetectionSuccess}" />
+                    <Binding Source="{StaticResource BrushDetectionFail}" />
+                    <Binding Path="Text" UpdateSourceTrigger="PropertyChanged" ElementName="root"/>
+                </MultiBinding>
+            </TextBox.Background>
+        </TextBox>
+        <TextBox Name="MainTextBox" Grid.Row="2" Text="{Binding Text, ElementName=root, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" Margin="5" >
+            <TextBox.InputBindings>
+                <KeyBinding Command="{Binding MyCMDAcceptAutoCompletedWord , ElementName=root}" Key="Enter">
+                    <KeyBinding.CommandParameter>
+                        <MultiBinding Converter="{StaticResource myAcceptAutoCompleteConverter}">
+                            <Binding Path="AutoCompleteSuggestion" ElementName="root"/>
+                            <Binding Path="Text" ElementName="root" />
+                            <Binding Path="" ElementName="root"/>
+                        </MultiBinding>
+                    </KeyBinding.CommandParameter>
+                </KeyBinding>
+                <KeyBinding Command="{Binding MyCMDAcceptAutoCompletedWord , ElementName=root}" Key="Tab">
+                    <KeyBinding.CommandParameter>
+                        <MultiBinding Converter="{StaticResource myAcceptAutoCompleteConverter}">
+                            <Binding Path="AutoCompleteSuggestion" ElementName="root"/>
+                            <Binding Path="Text" ElementName="root"/>
+                            <Binding Path="" ElementName="root"/>
+                        </MultiBinding>
+                    </KeyBinding.CommandParameter>
+                </KeyBinding>
+            
+            </TextBox.InputBindings>
+        </TextBox>
     </Grid>
 </UserControl>
